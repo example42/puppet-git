@@ -96,6 +96,8 @@ define git::reposync (
   $mode            = '0755',
   $ensure          = 'present' ) {
 
+  include git
+
   if ! defined(File['git_reposync']) {
     file { 'git_reposync':
       ensure  => present,
@@ -114,6 +116,7 @@ define git::reposync (
     owner   => $owner,
     group   => $group,
     content => template('git/reposync/git_reposync-command.erb'),
+    require => Package[$git::package],
   }
 
   if $autorun == true {
