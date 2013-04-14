@@ -124,23 +124,28 @@ class git (
   }
 
   ### Managed resources
-  package { $git::package:
-    ensure  => $git::manage_package,
-    noop    => $git::bool_noops,
+  if !defined(Package[$git::package]) {
+    package { $git::package:
+      ensure  => $git::manage_package,
+      noop    => $git::bool_noops,
+    }
   }
 
-  file { 'git.conf':
-    ensure  => $git::manage_file,
-    path    => $git::config_file,
-    mode    => $git::config_file_mode,
-    owner   => $git::config_file_owner,
-    group   => $git::config_file_group,
-    require => Package[$git::package],
-    source  => $git::manage_file_source,
-    content => $git::manage_file_content,
-    replace => $git::manage_file_replace,
-    audit   => $git::manage_audit,
-    noop    => $git::bool_noops,
+  if $git::source != ''
+  or $git::template != '' {
+    file { 'git.conf':
+      ensure  => $git::manage_file,
+      path    => $git::config_file,
+      mode    => $git::config_file_mode,
+      owner   => $git::config_file_owner,
+      group   => $git::config_file_group,
+      require => Package[$git::package],
+      source  => $git::manage_file_source,
+      content => $git::manage_file_content,
+      replace => $git::manage_file_replace,
+      audit   => $git::manage_audit,
+      noop    => $git::bool_noops,
+    }
   }
 
   ### Include custom class if $my_class is set

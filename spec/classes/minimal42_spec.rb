@@ -5,6 +5,7 @@ describe 'git' do
   let(:title) { 'git' }
   let(:node) { 'rspec.example42.com' }
   let(:facts) { { :ipaddress => '10.42.42.42' } }
+  let(:params) { { :template => 'git/spec.erb' } }
 
   describe 'Test minimal installation' do
     it { should contain_package('git').with_ensure('present') }
@@ -17,13 +18,13 @@ describe 'git' do
   end
 
   describe 'Test decommissioning - absent' do
-    let(:params) { {:absent => true } }
+    let(:params) { {:absent => true , :template => 'git/spec.erb' } }
     it 'should remove Package[git]' do should contain_package('git').with_ensure('absent') end 
     it 'should remove git configuration file' do should contain_file('git.conf').with_ensure('absent') end
   end
 
   describe 'Test noops mode' do
-    let(:params) { {:noops => true} }
+    let(:params) { {:noops => true, :template => 'git/spec.erb' } }
     it { should contain_package('git').with_noop('true') }
     it { should contain_file('git.conf').with_noop('true') }
   end
@@ -46,7 +47,7 @@ describe 'git' do
   end
 
   describe 'Test customizations - custom class' do
-    let(:params) { {:my_class => "git::spec" } }
+    let(:params) { {:my_class => "git::spec" , :template => 'git/spec.erb' } }
     it { should contain_file('git.conf').with_content(/rspec.example42.com/) }
   end
 
