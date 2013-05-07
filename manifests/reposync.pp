@@ -22,6 +22,9 @@
 # [*extra_options*]
 #   Optional extra options to add to git command. Default: ''.
 #
+# [*branch*]
+#   Optional branch name defaults to master
+#
 # [*autorun*]
 #   Define if to automatically execute the git_reposync script when
 #   Puppet runs. Default: true.
@@ -85,6 +88,7 @@ define git::reposync (
   $source_url,
   $destination_dir,
   $extra_options   = '',
+  $branch	   = 'master',
   $autorun         = true,
   $creates         = $destination_dir,
   $pre_command     = '',
