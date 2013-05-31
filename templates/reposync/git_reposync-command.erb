@@ -7,7 +7,7 @@ if [ ! -d <%= @destination_dir %> ] ; then
   git clone --recursive <%= @source_url %> -b <%= @branch %> <%= @destination_dir %>
 else
   cd <%= @destination_dir %>
-  git pull
+  git pull origin <%= @branch %>
 fi
 
 <%= @post_command %>
