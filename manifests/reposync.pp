@@ -88,7 +88,7 @@ define git::reposync (
   $source_url,
   $destination_dir,
   $extra_options   = '',
-  $branch	   = 'master',
+  $branch          = 'master',
   $autorun         = true,
   $creates         = $destination_dir,
   $pre_command     = '',
