@@ -32,7 +32,7 @@ This module requires the presence of Example42 Puppi module in your modulepath.
           absent => true
         }
 
-* Enable auditing without without making changes on existing git configuration *files*
+* Enable auditing without making changes on existing git configuration *files*
 
         class { 'git':
           audit_only => true
