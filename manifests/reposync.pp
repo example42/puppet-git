@@ -46,6 +46,10 @@
 #   by this define and it's executed every time this script is run (either
 #   manually or via Puppet). Default: ''
 #
+# [*execute_on_change*]
+#   Define if the pre_command and post_command will be execute at the same
+#   time as puppet (default) or only when change has been made into repository.
+#
 # [*basedir*]
 #   Directory where the git_reposync scripts are created.
 #   Default: /usr/local/sbin
@@ -87,20 +91,23 @@
 define git::reposync (
   $source_url,
   $destination_dir,
-  $extra_options   = '',
-  $branch          = 'master',
-  $autorun         = true,
-  $creates         = $destination_dir,
-  $pre_command     = '',
-  $post_command    = '',
-  $basedir         = '/usr/local/sbin',
-  $cron            = '',
-  $owner           = 'root',
-  $group           = 'root',
-  $mode            = '0755',
-  $ensure          = 'present' ) {
+  $extra_options     = '',
+  $branch            = 'master',
+  $autorun           = true,
+  $creates           = $destination_dir,
+  $pre_command       = '',
+  $post_command      = '',
+  $execute_on_change = false,
+  $basedir           = '/usr/local/sbin',
+  $cron              = '',
+  $owner             = 'root',
+  $group             = 'root',
+  $mode              = '0755',
+  $ensure            = 'present' ) {
 
   include git
+
+  $manage_execute_on_change = any2bool($execute_on_change)
 
   if ! defined(File['git_reposync']) {
     file { 'git_reposync':
