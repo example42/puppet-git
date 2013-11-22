@@ -1,6 +1,19 @@
 #!/bin/bash
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
+<% if @manage_execute_on_change == true %>
+if [ ! -d <%= @destination_dir %> ] ; then
+  repo_commit="0"
+  local_commit="1"
+else
+  cd <%= @destination_dir %>
+  repo_commit=$( git ls-remote -h origin master|awk '{ print $1 }' )
+  local_commit=$( git rev-parse HEAD )
+fi
+
+if [ "$repo_commit" != "$local_commit" ] ; then
+<% end %>
+
 <%= @pre_command %>
 
 if [ ! -d <%= @destination_dir %> ] ; then
@@ -11,3 +24,7 @@ else
 fi
 
 <%= @post_command %>
+
+<% if @execute_on_change == true %>
+fi
+<% end %>
