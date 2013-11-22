@@ -20,28 +20,11 @@ This module requires the presence of Example42 Puppi module in your modulepath.
 
         class { 'git': }
 
-* Install a specific version of git package
+* Clone a git repo to a local directory
 
-        class { 'git':
-          version => '1.0.1',
-        }
-
-* Remove git resources
-
-        class { 'git':
-          absent => true
-        }
-
-* Enable auditing without making changes on existing git configuration *files*
-
-        class { 'git':
-          audit_only => true
-        }
-
-* Module dry-run: Do not make any change on *all* the resources provided by the module
-
-        class { 'git':
-          noops => true
+        git::reposync { 'my_app':
+          source_url      => 'http://repo.example42.com/git/trunk/my_app/',
+          destination_dir => '/opt/myapp',
         }
 
 
