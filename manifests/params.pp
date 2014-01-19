@@ -36,6 +36,10 @@ class git::params {
     default => 'root',
   }
 
+  $default_owner  = 'root'
+  $default_branch = 'master'
+  $clones         = {}
+
   # General Settings
   $my_class = ''
   $source = ''

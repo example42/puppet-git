@@ -62,6 +62,21 @@
 # [*config_file*]
 #   Main configuration file path
 #
+# [*default_owner*]
+#   Owner of the repositories cloned via git::clone. Use this if most of the
+#   repositories you clone should belong to the same user.
+#   Default: root
+#
+# [*default_branch*]
+#   Branch on which to execute operations. In most cases 'master' is what you
+#   want, but if most of your repos should use another branch, use this
+#   parameter to set the default.
+#   Default: master
+#
+# [*clones*]
+#   A hash describing a list of repo to clone.
+#   Default: {}
+#
 # == Examples
 #
 # You can use this class in 2 ways:
@@ -81,7 +96,10 @@ class git (
   $audit_only          = params_lookup( 'audit_only' , 'global' ),
   $noops               = params_lookup( 'noops' ),
   $package             = params_lookup( 'package' ),
-  $config_file         = params_lookup( 'config_file' )
+  $config_file         = params_lookup( 'config_file' ),
+  $default_owner       = params_lookup( 'default_owner' ),
+  $default_branch      = params_lookup( 'default_branch' ),
+  $clones              = params_lookup( 'clones' ),
   ) inherits git::params {
 
   $config_file_mode=$git::params::config_file_mode
@@ -152,4 +170,5 @@ class git (
     include $git::my_class
   }
 
+  create_resources('git::clone', $clones)
 }
