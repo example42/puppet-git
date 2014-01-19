@@ -46,6 +46,7 @@ define git::clone (
     'present' : {
       exec { "git-clone-${name}":
         command => "git clone --recursive ${source_url} -b ${branch} ${extra_options} ${destination_dir}",
+        path    => '/usr/bin',
         creates => $creates,
         user    => $owner,
       }
