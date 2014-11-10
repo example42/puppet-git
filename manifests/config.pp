@@ -56,7 +56,7 @@ define git::config(
 
    exec { $real_section_key:
       command => "${real_command} ${real_section_key} \"$value\"",
-      onlyif  => "test \"`${real_command} ${real_section_key}`\" = \"${value}\"",
+      onlyif  => "test `${real_command} ${real_section_key}` = \"${value}\"",
       require => Package['git'],
    }
 }
