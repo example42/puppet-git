@@ -55,7 +55,6 @@ define git::config(
    }
 
    exec { $real_section_key:
-   	path    => "/usr/local/bin/:/bin/:/usr/bin/",
       command => "${real_command} ${real_section_key} \"${value}\"",
       unless  => "${real_command} ${real_section_key} | grep -c '${value}'",
       require => Package['git'],
