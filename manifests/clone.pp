@@ -30,13 +30,14 @@
 #   Owner of the cloned repo.
 #
 define git::clone (
-  $ensure        = 'present',
   $source_url,
   $destination_dir,
+  $ensure        = 'present',
   $creates       = $destination_dir,
   $extra_options = '',
   $branch        = $git::default_branch,
   $owner         = $git::default_owner,) {
+
   include git
 
   validate_string($owner)
@@ -52,7 +53,7 @@ define git::clone (
       }
     }
     'absent'  : {
-      file { "${destination_dir}":
+      file { $destination_dir:
         ensure  => 'absent',
         recurse => true,
         force   => true,

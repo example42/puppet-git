@@ -16,7 +16,7 @@
 #   present in the git_reposync script. Required.
 #
 # [*destination_dir*]
-#   Local directory where to sync the repository, As passed to the
+#   Local directory where to sync the repository. As passed to the
 #   git command present in the git_reposync script. Required.
 #
 # [*extra_options*]
@@ -35,13 +35,13 @@
 #   command (when autorun is enabled). Default: $destination_dir.
 #
 # [*pre_command*]
-#   Optional comman to execute before executing the git command.
+#   Optional command to execute before executing the git command.
 #   Note that this command is placed in the git_reposync script created
 #   by this define and it's executed every time this script is run (either
 #   manually or via Puppet). Default: ''
 #
 # [*post_command*]
-#   Optional comman to execute after executing the git command.
+#   Optional command to execute after executing the git command.
 #   Note that this command is placed in the git_reposync script created
 #   by this define and it's executed every time this script is run (either
 #   manually or via Puppet). Default: ''
@@ -132,8 +132,8 @@ define git::reposync (
 
   if $autorun == true {
     exec { "git_reposync_run_${name}":
-      command     => "${basedir}/git_reposync_${name}",
-      creates     => $creates,
+      command => "${basedir}/git_reposync_${name}",
+      creates => $creates,
     }
   }
 
