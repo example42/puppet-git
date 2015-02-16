@@ -143,8 +143,8 @@ class git (
   ### Managed resources
   if !defined(Package[$git::package]) {
     package { $git::package:
-      ensure  => $git::manage_package,
-      noop    => $git::noops,
+      ensure => $git::manage_package,
+      noop   => $git::noops,
     }
   }
 
