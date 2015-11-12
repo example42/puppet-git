@@ -7,7 +7,7 @@ if [ ! -d <%= @destination_dir %> ] ; then
   local_commit="1"
 else
   cd <%= @destination_dir %>
-  repo_commit=$( git ls-remote -h origin master|awk '{ print $1 }' )
+  repo_commit=$( git ls-remote -h origin <%= @branch %>|awk '{ print $1 }' )
   local_commit=$( git rev-parse HEAD )
 fi
 
