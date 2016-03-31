@@ -109,6 +109,14 @@ define git::reposync (
 
   $manage_execute_on_change = any2bool($execute_on_change)
 
+  if ! defined(File[$basedir]) {
+    file { $basedir:
+      ensure => directory,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0755',
+    }
+  }
   if ! defined(File['git_reposync']) {
     file { 'git_reposync':
       ensure  => present,

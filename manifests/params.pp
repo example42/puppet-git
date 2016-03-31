@@ -17,6 +17,10 @@ class git::params {
   ### Application related parameters
 
   $package = $::operatingsystem ? {
+    Solaris => $::opertaingsystemmajrelease ? {
+      '10'  => 'CSWgit',
+      '11'  => 'developer/versioning/git',
+    },
     default => 'git',
   }
 
