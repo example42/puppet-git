@@ -17,6 +17,11 @@ class git::params {
   ### Application related parameters
 
   $package = $::operatingsystem ? {
+    'Solaris' => $::operatingsystemmajrelease ? {
+      '10'  => 'CSWgit',
+      '11'  => 'developer/versioning/git',
+      '5'   => 'developer/versioning/git',
+    },
     default => 'git',
   }
 
@@ -48,6 +53,6 @@ class git::params {
   $version = 'present'
   $absent = false
   $audit_only = false
-  $noops = undef
+  $noops = false
 
 }
