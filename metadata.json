@@ -1,0 +1,21 @@
+{
+  "name": "example42-git",
+  "version": "2.0.20",
+  "summary": "Puppet module for git",
+  "author": "Alessandro Franceschi",
+  "description": "This module installs and manages git. Check README for details.",
+  "dependencies": [
+    {
+      "name": "example42/puppi",
+      "version_requirement": ">= 2.0.0"
+    }
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+  },
+  "source": "https://github.com/example42/puppet-git",
+  "project_page": "http://www.example42.com",
+  "license": "Apache2"
+}
