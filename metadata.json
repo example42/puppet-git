@@ -1,6 +1,6 @@
 {
   "name": "example42-git",
-  "version": "2.0.20",
+  "version": "2.0.21",
   "summary": "Puppet module for git",
   "author": "Alessandro Franceschi",
   "description": "This module installs and manages git. Check README for details.",
