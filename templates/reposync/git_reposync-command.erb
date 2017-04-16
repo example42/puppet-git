@@ -2,7 +2,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 <% if @manage_execute_on_change == true %>
-if [ ! -d <%= @destination_dir %> ] ; then
+if [ ! -d <%= @creates %> ] ; then
   repo_commit="0"
   local_commit="1"
 else
@@ -16,7 +16,7 @@ if [ "$repo_commit" != "$local_commit" ] ; then
 
 <%= @pre_command %>
 
-if [ ! -d <%= @destination_dir %> ] ; then
+if [ ! -d <%= @creates %> ] ; then
   git clone --recursive <%= @source_url %> -b <%= @branch %> <%= @destination_dir %>
 else
   cd <%= @destination_dir %>
