@@ -23,12 +23,6 @@ describe 'git' do
     it 'should remove git configuration file' do should contain_file('git.conf').with_ensure('absent') end
   end
 
-  describe 'Test noops mode' do
-    let(:params) { {:noops => true, :template => 'git/spec.erb' } }
-    it { should contain_package('git').with_noop('true') }
-    it { should contain_file('git.conf').with_noop('true') }
-  end
-
   describe 'Test customizations - template' do
     let(:params) { {:template => "git/spec.erb" , :options => { 'opt_a' => 'value_a' } } }
     it 'should generate a valid template' do
