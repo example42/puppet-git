@@ -45,11 +45,6 @@
 #   Can be defined also by the (top scope) variables $git_audit_only
 #   and $audit_only
 #
-# [*noops*]
-#   Set noop metaparameter to true for all the resources managed by the module.
-#   Basically you can run a dryrun for this specific module if you set
-#   this to true. Default: undef
-#
 # Default class params - As defined in git::params.
 # Note that these variables are mostly defined and used in the module itself,
 # overriding the default values might not affected all the involved components.
@@ -94,7 +89,6 @@ class git (
   $version             = params_lookup( 'version' ),
   $absent              = params_lookup( 'absent' ),
   $audit_only          = params_lookup( 'audit_only' , 'global' ),
-  $noops               = params_lookup( 'noops' ),
   $package             = params_lookup( 'package' ),
   $config_file         = params_lookup( 'config_file' ),
   $default_owner       = params_lookup( 'default_owner' ),
@@ -144,7 +138,6 @@ class git (
   if !defined(Package[$git::package]) {
     package { $git::package:
       ensure => $git::manage_package,
-      noop   => $git::noops,
     }
   }
 
@@ -161,7 +154,6 @@ class git (
       content => $git::manage_file_content,
       replace => $git::manage_file_replace,
       audit   => $git::manage_audit,
-      noop    => $git::noops,
     }
   }
 

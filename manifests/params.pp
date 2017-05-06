@@ -48,6 +48,5 @@ class git::params {
   $version = 'present'
   $absent = false
   $audit_only = false
-  $noops = undef
 
 }
